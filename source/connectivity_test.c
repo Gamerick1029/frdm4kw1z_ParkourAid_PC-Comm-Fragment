@@ -208,7 +208,7 @@ void main_task(uint32_t param)
         App_InitApp();
 
         /*start serial flashing using all LEDs*/
-        LED_StartSerialFlash(LED1);
+        Led2Flashing();
         
         /*initialize the application interface id*/
         Serial_InitInterface(&mAppSerId, 
@@ -228,7 +228,7 @@ void main_task(uint32_t param)
         Fxi_init(fxosHandle);
         Fxi_setSensorRange(fxosHandle, range8);
 
-    	Serial_Print(mAppSerId, "\r\nReady to receive...\r\n", 1);
+    	Serial_Print(mAppSerId, "Ready to be an accelerometer...\r\n", 1);
     }
     
     /* Call application task */
@@ -313,6 +313,7 @@ static void App_SendAccelData(){
 	};
 
 	IT_TxWithPayload(message, 4, broadcastID);
+	Serial_Print(mAppSerId, "Responding to accel data request\n\r", 1);
 }
 
 static void App_ResolveUartRx(){
